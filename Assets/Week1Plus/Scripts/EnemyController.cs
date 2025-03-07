@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Transform Player;
+    protected Transform Player;
+    protected Rigidbody2D Rigidbody;
     
     public float Health
     {
@@ -19,36 +20,20 @@ public class EnemyController : MonoBehaviour
     
     [SerializeField] private float health = 1f;
     
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float chaseRange = 5f;
+    [SerializeField] protected float moveSpeed = 1f;
 
-    [SerializeField] protected Rigidbody2D Rigidbody;
-    [SerializeField] private ParticleSystem collisionParticles;
     
-    private void Start()
+    protected virtual void Start()
     {
+        Rigidbody = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        ChasePlayer();
+        // override
     }
-
-    private void ChasePlayer()
-    {
-        var distance = Vector2.Distance(Player.position, transform.position);
-        if (distance > chaseRange)
-        {
-            Rigidbody.linearVelocity = Vector2.zero;
-            return;
-        }
-
-        Vector2 direction = Player.position - transform.position;
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        Rigidbody.linearVelocity = direction.normalized * moveSpeed;
-    }
+    
     
     public void DamageEnemy(float damage)
     {

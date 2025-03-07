@@ -221,8 +221,8 @@ GameObject:
   - component: {fileID: 6052284026454200190}
   - component: {fileID: 8994247112751635413}
   m_Layer: 0
-  m_Name: MisileProjectile
-  m_TagString: Untagged
+  m_Name: Ultimate
+  m_TagString: Ultimate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

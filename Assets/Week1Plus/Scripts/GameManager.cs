@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public PlayerController Player;
+    public CameraController Camera;
     
     private void Awake()
     {

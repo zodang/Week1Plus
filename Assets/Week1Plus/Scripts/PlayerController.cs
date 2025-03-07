@@ -6,24 +6,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidbody;
     [SerializeField] private float moveSpeed = 5f;
     private Vector2 _movement;
+
+    private bool _canMove = true;
     
     private void Update()
     {
+        
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
         RotatePlayer();
+        MovePlayer();
     }
 
-    private void FixedUpdate()
+    public void ActivatePlayerMovement(bool canMove)
     {
-        MovePlayer();
+        _canMove = canMove;
+        rigidbody.linearVelocity = Vector2.zero;
     }
 
     private void MovePlayer()
     {
+        if (!_canMove)
+        {
+            return;
+        }
+        
         rigidbody.linearVelocity = _movement.normalized * moveSpeed;
-
     }
 
     private void RotatePlayer()

@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour
         {
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             DamageEnemy(enemy, damage);
+            Destroy(gameObject);
         }
     }
     
