@@ -1,10 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private Rigidbody2D rigidbody;
     [SerializeField] private float moveSpeed = 5f;
     private Vector2 _movement;
+
+    
 
     private void Update()
     {
@@ -28,4 +34,6 @@ public class PlayerController : MonoBehaviour
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
+
+    
 }

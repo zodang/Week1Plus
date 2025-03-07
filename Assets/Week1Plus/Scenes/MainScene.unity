@@ -354,6 +354,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &633863483 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9207453093371794570, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+  m_PrefabInstance: {fileID: 2061990685977649773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2082700608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
@@ -364,7 +369,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4497136772192143483, guid: aa4211c57aede61449387ce8b5661534, type: 3}
   m_PrefabInstance: {fileID: 2061990685977649773}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2082700610
+--- !u!114 &2082700612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,38 +378,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082700608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f66e3b99287050f4095afc754b974896, type: 3}
+  m_Script: {fileID: 11500000, guid: f59361d116481db449e6e542740a6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 2082700611}
-  moveSpeed: 5
---- !u!50 &2082700611
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082700608}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  shootPoint: {fileID: 633863483}
+  projectilePrefab: {fileID: 4355679120482406697, guid: 8d262439c204d7442ae354b433965c51, type: 3}
+  fireRate: 0.5
+  coolDown: 0
+  damage: 5
+  projectileSpeed: 10
+  misilePrefab: {fileID: 4355679120482406697, guid: 266b7c2026129e943ae4d2fc254ffcd0, type: 3}
+  spawnDistance: 1.5
+  rotationSpeed: 100
+  launchSpeed: 15
 --- !u!1 &2143476738
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,11 +479,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2082700610}
-    - targetCorrespondingSourceObject: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2082700611}
+      insertIndex: 2
+      addedObject: {fileID: 2082700612}
   m_SourcePrefab: {fileID: 100100000, guid: aa4211c57aede61449387ce8b5661534, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
