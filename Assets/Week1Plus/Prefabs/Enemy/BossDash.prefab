@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409757766490006028}
   m_Layer: 3
-  m_Name: DashBoss
+  m_Name: BossDash
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4794035260619586948}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

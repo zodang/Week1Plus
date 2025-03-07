@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 633863483}
   projectilePrefab: {fileID: 4355679120482406697, guid: 8d262439c204d7442ae354b433965c51, type: 3}
-  fireRate: 0.5
+  fireRate: 0.3
   coolDown: 0
   damage: 5
   projectileSpeed: 10
@@ -391,6 +391,52 @@ MonoBehaviour:
   spawnDistance: 1.5
   rotationSpeed: 100
   launchSpeed: 15
+--- !u!61 &2082700613
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082700608}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.20589238, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8746742, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2143476738
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +476,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2079149033500996069, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4497136772192143483, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -474,6 +524,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -481,6 +539,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       insertIndex: 2
       addedObject: {fileID: 2082700612}
+    - targetCorrespondingSourceObject: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2082700613}
   m_SourcePrefab: {fileID: 100100000, guid: aa4211c57aede61449387ce8b5661534, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

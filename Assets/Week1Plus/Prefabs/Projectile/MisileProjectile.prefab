@@ -255,7 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e0fe86a662fa94785dcbea37808f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 10
+  speed: 10
+  damage: 1
+  particle: {fileID: 3579562247292487899, guid: 8a6f4f53fee67f8469a522254c1d73f9, type: 3}
 --- !u!50 &6052284026454200190
 Rigidbody2D:
   serializedVersion: 5
