@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject particle;
     private Rigidbody2D _rigidbody;
 
-    private void Start()
+    protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.linearVelocity = transform.right * speed;
@@ -31,7 +31,12 @@ public class Projectile : MonoBehaviour
     
     private void DamageEnemy(EnemyController enemy, float damageValue)
     {
-        Instantiate(particle, transform.position, Quaternion.identity);
+        StartParticle();
         enemy.DamageEnemy(damageValue);
+    }
+
+    public void StartParticle()
+    {
+        Instantiate(particle, transform.position, Quaternion.identity);
     }
 }

@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5857382429948275200}
-  - component: {fileID: 7289949643897419462}
+  - component: {fileID: 2122188347608317856}
   - component: {fileID: 6052284026454200190}
   - component: {fileID: 8994247112751635413}
   m_Layer: 0
@@ -237,13 +237,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2269127878674465784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7289949643897419462
+--- !u!114 &2122188347608317856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,11 +252,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4355679120482406697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e0fe86a662fa94785dcbea37808f85, type: 3}
+  m_Script: {fileID: 11500000, guid: bffecb5507197b240af4fb8d724e333d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  damage: 1
+  speed: 20
+  damage: 5
   particle: {fileID: 3579562247292487899, guid: 8a6f4f53fee67f8469a522254c1d73f9, type: 3}
 --- !u!50 &6052284026454200190
 Rigidbody2D:

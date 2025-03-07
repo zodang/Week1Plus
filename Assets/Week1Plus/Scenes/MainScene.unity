@@ -423,7 +423,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3.5
+  m_Radius: 7
 --- !u!114 &654159720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +451,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f66e3b99287050f4095afc754b974896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2082700612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5145926872150438772, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+  m_PrefabInstance: {fileID: 2061990685977649773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082700608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59361d116481db449e6e542740a6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2143476738
@@ -499,6 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 2082700610}
   Camera: {fileID: 519420033}
+  isBossState: 0
 --- !u!4 &409757768003881825
 Transform:
   m_ObjectHideFlags: 0
@@ -508,8 +520,8 @@ Transform:
   m_GameObject: {fileID: 1822158916966815163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.02, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 654159718}
@@ -725,9 +737,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5145926872150438772, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: ultimatePrefab
+      value: 
+      objectReference: {fileID: 4355679120482406697, guid: 266b7c2026129e943ae4d2fc254ffcd0, type: 3}
     - target: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538045274195806384, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: boundary
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538045274195806384, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: playerAttack
+      value: 
+      objectReference: {fileID: 2082700612}
+    - target: {fileID: 6538045274195806384, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: constraintOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538045274195806384, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: constraintXValue
+      value: 17.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538045274195806384, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: constraintYValue
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

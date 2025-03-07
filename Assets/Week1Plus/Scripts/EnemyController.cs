@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
     }
     
     [SerializeField] private float health = 1f;
-    
     [SerializeField] protected float moveSpeed = 1f;
 
     

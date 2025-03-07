@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float projectileSpeed = 7;
     
     [Header("Misile")]
-    [SerializeField] private GameObject misilePrefab;
+    [SerializeField] private GameObject ultimatePrefab;
     [SerializeField] private float spawnDistance;
     [SerializeField] private float rotationSpeed = 100f;
     [SerializeField] private float launchSpeed = 5f;
@@ -68,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
             // UIManager.instance.UpdateMissile();
             Vector3 spawnPos = transform.position + Vector3.up * spawnDistance;
 
-            _currentProjectile = Instantiate(misilePrefab, spawnPos, Quaternion.identity);
+            _currentProjectile = Instantiate(ultimatePrefab, spawnPos, Quaternion.identity);
             _currentProjectile.tag = "Untagged";
         }
     }
@@ -83,7 +83,7 @@ public class PlayerAttack : MonoBehaviour
     
     private void LaunchProjectile()
     {
-        // _currentProjectile.tag = "Missile Projectile";
+        _currentProjectile.tag = "Ultimate";
 
         var direction = (_currentProjectile.transform.position - transform.position).normalized;
         var rb = _currentProjectile.GetComponent<Rigidbody2D>();
@@ -91,10 +91,19 @@ public class PlayerAttack : MonoBehaviour
 
         rb.linearVelocity = direction * launchSpeed;
 
-
         // Init current projectile
         _currentProjectile = null;
         _rotateAngle = 90;
         _rotateDirection = 0;
+    }
+
+    public bool CheckUltimateDistance()
+    {
+        if (_currentProjectile == null)
+        {
+            return true;
+        }
+
+        return spawnDistance > Vector2.Distance(_currentProjectile.transform.position, transform.position);
     }
 }
