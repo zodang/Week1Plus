@@ -9,15 +9,7 @@ public class Item : MonoBehaviour
     [SerializeField] private int healthAmount;
     [SerializeField] private int ultimateAmount;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            UseItem();
-        }
-    }
-
-    private void UseItem()
+    public void UseItem()
     {
         switch (itemType)
         {
@@ -32,7 +24,7 @@ public class Item : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
+        GameManager.Instance.SpawnManager.RemoveSpawnedItem(this);
     }
-
-
 }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public PlayerController Player;
     public CameraController Camera;
     public UIManager UIManager;
+    public SpawnManager SpawnManager;
 
     public bool isBossState;
 

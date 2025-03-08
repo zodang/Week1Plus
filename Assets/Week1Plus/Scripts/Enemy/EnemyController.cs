@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using EnumTypes;
 
 public class EnemyController : MonoBehaviour
 {
@@ -89,6 +88,7 @@ public class EnemyController : MonoBehaviour
 
     public void KillEnemy()
     {
+        GameManager.Instance.SpawnManager.SpawnItem(transform);
         Destroy(gameObject);
     }
     

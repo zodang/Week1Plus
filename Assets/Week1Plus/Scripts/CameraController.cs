@@ -75,14 +75,10 @@ public class CameraController : MonoBehaviour
         IsTransitioning = false;
     }
     
-    public void ShakeCamera(){
-        Debug.Log("@@DE ---> SHAKE");
-        _inDamage = true;
-        Invoke(nameof(StopShake), 0.1f);
-    }
-
-    private void StopShake()
+    public IEnumerator ShakeCameraCo()
     {
+        _inDamage = true;
+        yield return new WaitForSeconds(0.1f);
         _inDamage = false;
     }
 }

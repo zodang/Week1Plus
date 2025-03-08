@@ -55,9 +55,17 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            GameManager.Instance.Camera.ShakeCamera();
+            var enemy = collision.GetComponent<EnemyController>();
+            
             HealthTotalCount--;
-            collision.GetComponent<EnemyController>().KillEnemy();
+            enemy.KillEnemy();
+            StartCoroutine(GameManager.Instance.Camera.ShakeCameraCo());
+        }
+
+        if (collision.CompareTag("Item"))
+        {
+            var item = collision.GetComponent<Item>();
+            item.UseItem();
         }
     }
 
