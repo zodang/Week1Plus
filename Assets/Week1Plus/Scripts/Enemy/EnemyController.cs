@@ -34,10 +34,7 @@ public class EnemyController : MonoBehaviour
     
     protected virtual void Start()
     {
-        
-        // Player = GameObject.FindGameObjectWithTag("Player").transform;
         Rigidbody = GetComponent<Rigidbody2D>();
-        
         StartCoroutine(MoveRoutine());
     }
     
@@ -90,7 +87,7 @@ public class EnemyController : MonoBehaviour
         Health -= damage;
     }
 
-    private void KillEnemy()
+    public void KillEnemy()
     {
         Destroy(gameObject);
     }

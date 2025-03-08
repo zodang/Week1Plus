@@ -7,6 +7,9 @@ public class CameraController : MonoBehaviour
     private GameObject _target;
     
     [SerializeField] private float transitionSpeed = 2.0f;
+
+    private Vector3 _damangeFXPosition;
+    private bool _inDamage;
     
     private bool _isTransitioning;
     public bool IsTransitioning
@@ -18,6 +21,10 @@ public class CameraController : MonoBehaviour
             GameManager.Instance.Player.ActivatePlayerMovement(!_isTransitioning);
         }
     }
+    
+    private float MakeDamageFXMagnitude(){
+        return Random.Range(-0.2f, 0.2f);
+    }
 
 
     void Start()
@@ -27,18 +34,23 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
+        // Camera Shaking 
+        _damangeFXPosition = _inDamage ? new Vector3(MakeDamageFXMagnitude(), MakeDamageFXMagnitude(), 0) : Vector3.zero;
+
+        // Follow Player
         if (_target == player)
         {
             FollowPlayer();
         }
     }
-    
+
     private void FollowPlayer()
     {
         var playerTransform = player.transform;
-        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10);
+        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10) +
+                             _damangeFXPosition;
     }
-    
+
     public void SetCameraTarget(GameObject newTarget)
     {
         _target = newTarget;
@@ -61,5 +73,16 @@ public class CameraController : MonoBehaviour
         }
 
         IsTransitioning = false;
+    }
+    
+    public void ShakeCamera(){
+        Debug.Log("@@DE ---> SHAKE");
+        _inDamage = true;
+        Invoke(nameof(StopShake), 0.1f);
+    }
+
+    private void StopShake()
+    {
+        _inDamage = false;
     }
 }

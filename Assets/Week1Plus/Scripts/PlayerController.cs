@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,19 +9,21 @@ public class PlayerController : MonoBehaviour
     [Header("Health")]
     public int HealthTotalCount
     {
-        get => healthTotalCount;
+        get => _healthTotalCount;
         set
         {
-            healthTotalCount = value;
-            GameManager.Instance.UIManager.UpdateHealth(healthTotalCount);
-            if (healthTotalCount <= 0)
+            _healthTotalCount = value;
+            GameManager.Instance.UIManager.UpdateHealth(_healthTotalCount);
+            if (_healthTotalCount <= 0)
             {
                 KillPlayer();
             }
         }
     }
     
-    [SerializeField] private int healthTotalCount = 5;
+    [SerializeField] private int healthMaxCount = 5;
+    private int _healthTotalCount = 5;
+
     
     [Header("Movement")]
     [SerializeField] private Rigidbody2D rigidbody;
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour
 
     private bool _canMove = true;
 
+    private void Start()
+    {
+        HealthTotalCount = healthMaxCount;
+    }
+
     private void Update()
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
@@ -41,6 +49,16 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
         MovePlayer();
         ConstraintPosition();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            GameManager.Instance.Camera.ShakeCamera();
+            HealthTotalCount--;
+            collision.GetComponent<EnemyController>().KillEnemy();
+        }
     }
 
     public void ActivatePlayerMovement(bool canMove)
