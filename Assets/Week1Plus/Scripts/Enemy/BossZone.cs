@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossZone : MonoBehaviour
 {
-    [SerializeField] private GameObject boss;
+    [SerializeField] private BossEnemy boss;
     
     private bool isPlayerInBossZone;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,6 +18,7 @@ public class BossZone : MonoBehaviour
         }
             
         isPlayerInBossZone = true;
-        GameManager.Instance.Camera.SetCameraTarget(boss);
+        GameManager.Instance.Camera.SetCameraTarget(boss.gameObject);
+        StartCoroutine(boss.MoveRoutine());
     }
 }

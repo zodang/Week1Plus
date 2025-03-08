@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     public PlayerAttack playerAttack;
+    public bool IsBossState;
     
     [Header("Health")]
     public int HealthTotalCount
@@ -28,13 +29,15 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private Rigidbody2D rigidbody;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float constraintXValue;
-    [SerializeField] private float constraintYValue;
-    [SerializeField] private float constraintOffset;
+    
     
     private Vector2 _movement;
 
     private bool _canMove = true;
+    
+    private float constraintXValue = 16;
+    private float constraintYValue = 10;
+    private float constraintOffset = 1;
 
     private void Start()
     {
@@ -48,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         RotatePlayer();
         MovePlayer();
-        ConstraintPosition();
+        ConstraintPosition(rigidbody);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,9 +59,14 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             var enemy = collision.GetComponent<EnemyController>();
+
+            // Basic enemy
+            if (!enemy.IsBossEnemy())
+            {
+                enemy.KillEnemy();
+            }
             
             HealthTotalCount--;
-            enemy.KillEnemy();
             StartCoroutine(GameManager.Instance.Camera.ShakeCameraCo());
         }
 
@@ -84,20 +92,26 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.linearVelocity = _movement.normalized * moveSpeed;
     }
-
-    private void ConstraintPosition()
+    
+    public void ConstraintPosition(Rigidbody2D rigidbody)
     {
-        if (!GameManager.Instance.isBossState)
+        if (!IsBossState)
         {
             return;
         }
 
-        var camera = Camera.main.transform;
+        if (GameManager.Instance.Camera.IsTransitioning)
+        {
+            return;
+        }
+        
+        var offset = 0.04f;
+        var minBounds = Camera.main.ViewportToWorldPoint(new Vector3(offset, offset, transform.position.z));
+        var maxBounds = Camera.main.ViewportToWorldPoint(new Vector3(1 - offset, 1 - offset, transform.position.z));
+        
         var clampedPosition = new Vector3(
-            Mathf.Clamp(rigidbody.position.x, camera.position.x - (constraintXValue + constraintOffset),
-                camera.position.x + constraintXValue - constraintOffset),
-            Mathf.Clamp(rigidbody.position.y, camera.position.y - constraintYValue + constraintOffset,
-                camera.position.x + constraintYValue - constraintOffset)
+            Mathf.Clamp(rigidbody.position.x, minBounds.x, maxBounds.x),
+            Mathf.Clamp(rigidbody.position.y, minBounds.y, maxBounds.y)
         );
         
         rigidbody.position = clampedPosition;

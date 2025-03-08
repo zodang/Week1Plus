@@ -39,14 +39,17 @@ public class EnemyController : MonoBehaviour
     protected virtual void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
-
+        HealthTotalCount = healthMaxCount;
+        
         if (enemyType is EnemyType.Dash or EnemyType.Laser or EnemyType.BlackHole)
         {
             _bossEnemy = GetComponent<BossEnemy>();
         }
         
-        HealthTotalCount = healthMaxCount;
-        StartCoroutine(MoveRoutine());
+        if (!_bossEnemy)
+        {
+            StartCoroutine(MoveRoutine());
+        }
     }
     
     private IEnumerator MoveRoutine()
@@ -112,5 +115,10 @@ public class EnemyController : MonoBehaviour
     public void AttackPlayer()
     {
         
+    }
+
+    public bool IsBossEnemy()
+    {
+        return _bossEnemy;
     }
 }

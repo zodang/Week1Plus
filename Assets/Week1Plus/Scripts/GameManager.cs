@@ -12,9 +12,11 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public SpawnManager SpawnManager;
 
-    public bool isBossState;
+    
 
     public int totalScoreCount = 0;
+    
+    
     
     private void Awake()
     {
@@ -39,4 +41,6 @@ public class GameManager : MonoBehaviour
         totalScoreCount += score;
         UIManager.UpdateScore(totalScoreCount);
     }
+    
+    
 }

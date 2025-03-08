@@ -73,6 +73,7 @@ public class CameraController : MonoBehaviour
         }
 
         IsTransitioning = false;
+        GameManager.Instance.Player.IsBossState = true;
     }
     
     public IEnumerator ShakeCameraCo()
