@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     }
     
     [SerializeField] private int healthMaxCount = 5;
-    private int _healthTotalCount = 5;
+    private int _healthTotalCount;
 
     
     [Header("Movement")]

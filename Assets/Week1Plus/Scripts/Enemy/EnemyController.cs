@@ -1,27 +1,32 @@
 using System.Collections;
 using UnityEngine;
+using EnumTypes;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private EnemyType enemyType;
+    private BossEnemy _bossEnemy;
+    
     protected Transform Player;
     protected Rigidbody2D Rigidbody;
     
     [Header("Health")]
-    public int Health
+    public int HealthTotalCount
     {
         
-        get => health;
+        get => _healthTotalCount;
         set
         {
-            health = value;
-            if (health <= 0)
+            _healthTotalCount = value;
+            if (_healthTotalCount <= 0)
             {
                 KillEnemy();
             }
         }
     }
     
-    [SerializeField] private int health = 1;
+    [SerializeField] protected int healthMaxCount = 1;
+    private int _healthTotalCount;
     
     [Header("Movement")]
     [SerializeField] protected float rotationSpeed = 1f;
@@ -34,6 +39,13 @@ public class EnemyController : MonoBehaviour
     protected virtual void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+
+        if (enemyType is EnemyType.Dash or EnemyType.Laser or EnemyType.BlackHole)
+        {
+            _bossEnemy = GetComponent<BossEnemy>();
+        }
+        
+        HealthTotalCount = healthMaxCount;
         StartCoroutine(MoveRoutine());
     }
     
@@ -83,7 +95,12 @@ public class EnemyController : MonoBehaviour
     
     public void DamageEnemy(int damage)
     {
-        Health -= damage;
+        HealthTotalCount -= damage;
+
+        if (_bossEnemy)
+        {
+            _bossEnemy.UpdateHealthBar();
+        }
     }
 
     public void KillEnemy()

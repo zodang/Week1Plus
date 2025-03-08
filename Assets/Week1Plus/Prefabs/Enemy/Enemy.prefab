@@ -52,7 +52,6 @@ MonoBehaviour:
   moveSpeed: 5
   moveTime: 0.7
   restTime: 1
-  enemyParticle: {fileID: 3579562247292487899, guid: 8a6f4f53fee67f8469a522254c1d73f9, type: 3}
 --- !u!212 &6725635248580317566
 SpriteRenderer:
   m_ObjectHideFlags: 0
