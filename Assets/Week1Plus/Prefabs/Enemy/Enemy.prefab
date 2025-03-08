@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  moveSpeed: 1
-  chaseRange: 5
-  Rigidbody: {fileID: 2775481827837913462}
-  collisionParticles: {fileID: 0}
+  rotationSpeed: 8
+  moveSpeed: 5
+  moveTime: 0.7
+  restTime: 1
 --- !u!212 &6725635248580317566
 SpriteRenderer:
   m_ObjectHideFlags: 0

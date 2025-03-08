@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float damage = 1f;
+    [SerializeField] private int damage = 1;
     [SerializeField] private GameObject particle;
     private Rigidbody2D _rigidbody;
 
@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
         }
     }
     
-    private void DamageEnemy(EnemyController enemy, float damageValue)
+    private void DamageEnemy(EnemyController enemy, int damageValue)
     {
         StartParticle();
         enemy.DamageEnemy(damageValue);

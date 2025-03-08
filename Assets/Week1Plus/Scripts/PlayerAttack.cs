@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float projectileSpeed = 7;
     
     [Header("Misile")]
+    public int UltimateTotalCount = 10;
     [SerializeField] private GameObject ultimatePrefab;
     [SerializeField] private float spawnDistance;
     [SerializeField] private float rotationSpeed = 100f;
@@ -48,6 +50,8 @@ public class PlayerAttack : MonoBehaviour
         if (_currentProjectile != null)
         {
             LaunchProjectile();
+            UltimateTotalCount--;
+            GameManager.Instance.UIManager.UpdateUltimate(UltimateTotalCount);
         }
     }
     
@@ -105,5 +109,11 @@ public class PlayerAttack : MonoBehaviour
         }
 
         return spawnDistance > Vector2.Distance(_currentProjectile.transform.position, transform.position);
+    }
+    
+    public void ChangePlayerUltimateCount(int amount)
+    {
+        UltimateTotalCount += amount;
+        GameManager.Instance.UIManager.UpdateUltimate(UltimateTotalCount);
     }
 }

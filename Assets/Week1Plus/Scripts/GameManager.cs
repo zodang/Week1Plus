@@ -1,16 +1,19 @@
 using System;
 using UnityEngine;
+using EnumTypes;
 using UnityEngine.Serialization;
-
-
 
 public class GameManager : MonoBehaviour
 {
+    public GameState currentGameState;
     public static GameManager Instance;
     public PlayerController Player;
     public CameraController Camera;
+    public UIManager UIManager;
 
     public bool isBossState;
+
+    public int totalScoreCount = 0;
     
     private void Awake()
     {
@@ -22,5 +25,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        currentGameState = GameState.Play;
+        UIManager.ChangeUI(currentGameState);
+    }
+    
+    public void IncreaseScore(int score)
+    {
+        totalScoreCount += score;
+        UIManager.UpdateScore(totalScoreCount);
     }
 }

@@ -1,8 +1,26 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerAttack playerAttack;
+    
+    [Header("Health")]
+    public int HealthTotalCount
+    {
+        get => healthTotalCount;
+        set
+        {
+            healthTotalCount = value;
+            GameManager.Instance.UIManager.UpdateHealth(healthTotalCount);
+            if (healthTotalCount <= 0)
+            {
+                KillPlayer();
+            }
+        }
+    }
+    
+    [SerializeField] private int healthTotalCount = 5;
     
     [Header("Movement")]
     [SerializeField] private Rigidbody2D rigidbody;
@@ -66,5 +84,16 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = (mousePosition - transform.position).normalized;
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    public void ChangePlayerHealth(int amount)
+    {
+        HealthTotalCount += amount;
+    }
+    
+
+    private void KillPlayer()
+    {
+        throw new System.NotImplementedException();
     }
 }

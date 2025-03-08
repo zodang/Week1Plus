@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7507218001053122121}
+  - component: {fileID: 442722642035497319}
   - component: {fileID: 367927551905419508}
   m_Layer: 0
-  m_Name: Item Heal
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +36,21 @@ Transform:
   - {fileID: 2484851569097022148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &442722642035497319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572938174624973367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e961a2ec924588e4d95a38b90c4e3a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 1
+  healthAmount: 1
+  ultimateAmount: 5
 --- !u!58 &367927551905419508
 CircleCollider2D:
   m_ObjectHideFlags: 0
