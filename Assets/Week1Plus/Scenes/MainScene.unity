@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &425453305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425453306}
+  m_Layer: 0
+  m_Name: ItemGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425453306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425453305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1089280343}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,10 +551,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd56860a09c2960449313cc3292532ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyGroup: {fileID: 1494196430}
+  ItemGroup: {fileID: 425453305}
   Items:
   - {fileID: 5724183043408375432, guid: 0d954aa8d38f59848935c14bfd36744e, type: 3}
   - {fileID: 3737404031301352069, guid: 0bc133f82f6b70d469459f63c6b802ff, type: 3}
   SpawnedItemList: []
+  Enemies:
+  - {fileID: 844602451441320443, guid: dd0cf883cadbb3d42a4926a6d1dba18f, type: 3}
+  SpawnedEnemyList: []
+  enemySpawnRange: {x: 12, y: 20}
+  bossEnemies:
+  - {fileID: 484177703972530780, guid: 312aad9e9c96f51449af91db52db9e95, type: 3}
+  SpawnedBossEnemy: {fileID: 0}
 --- !u!4 &1089280343
 Transform:
   m_ObjectHideFlags: 0
@@ -536,7 +576,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1494196431}
+  - {fileID: 425453306}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1164669394
@@ -551,7 +593,7 @@ GameObject:
   - component: {fileID: 1164669397}
   - component: {fileID: 1164669396}
   m_Layer: 5
-  m_Name: ScoreCount
+  m_Name: TimeCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -753,6 +795,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1494196430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1494196431}
+  m_Layer: 0
+  m_Name: EnemyGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1494196431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494196430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1089280343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1734148050
 GameObject:
@@ -1123,7 +1196,9 @@ MonoBehaviour:
   Camera: {fileID: 519420033}
   UIManager: {fileID: 1976105294}
   SpawnManager: {fileID: 1089280342}
+  Stage: 0
   totalScoreCount: 0
+  isBossSpawned: 0
 --- !u!1001 &2061990685977649773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1138,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497136772192143483, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4497136772192143483, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1176,6 +1251,10 @@ PrefabInstance:
       propertyPath: ultimatePrefab
       value: 
       objectReference: {fileID: 4355679120482406697, guid: 266b7c2026129e943ae4d2fc254ffcd0, type: 3}
+    - target: {fileID: 5145926872150438772, guid: aa4211c57aede61449387ce8b5661534, type: 3}
+      propertyPath: ProjectileGroup
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6222036251659840267, guid: aa4211c57aede61449387ce8b5661534, type: 3}
       propertyPath: m_Name
       value: Player

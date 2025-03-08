@@ -25,7 +25,6 @@ public class Projectile : MonoBehaviour
         {
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             DamageEnemy(enemy, damage);
-            Destroy(gameObject);
         }
     }
     
@@ -33,6 +32,7 @@ public class Projectile : MonoBehaviour
     {
         StartParticle();
         enemy.DamageEnemy(damageValue);
+        Destroy(gameObject);
     }
 
     public void StartParticle()

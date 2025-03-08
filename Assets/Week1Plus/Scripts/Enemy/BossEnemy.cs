@@ -23,7 +23,7 @@ public class BossEnemy : EnemyController
 
     protected override void Update()
     {
-        
+        // 
     }
 
     public void UpdateHealthBar()

@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
-  healthMaxCount: 100
+  healthMaxCount: 10
   rotationSpeed: 8
   moveSpeed: 5
   moveTime: 0.7

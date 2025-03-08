@@ -4,6 +4,8 @@ using UnityEngine.Serialization;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public GameObject ProjectileGroup;
+
     [Header("projectile")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject projectilePrefab;

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e961a2ec924588e4d95a38b90c4e3a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 1
+  itemType: 0
   healthAmount: 1
   ultimateAmount: 5
 --- !u!58 &367927551905419508

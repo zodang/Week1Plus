@@ -42,6 +42,10 @@ public class CameraController : MonoBehaviour
         {
             FollowPlayer();
         }
+        else
+        {
+            transform.position += _damangeFXPosition;
+        }
     }
 
     private void FollowPlayer()

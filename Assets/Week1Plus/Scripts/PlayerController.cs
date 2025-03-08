@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
             // Basic enemy
             if (!enemy.IsBossEnemy())
             {
-                enemy.KillEnemy();
+                enemy.KillEnemy(false);
             }
             
             HealthTotalCount--;
@@ -134,6 +134,6 @@ public class PlayerController : MonoBehaviour
 
     private void KillPlayer()
     {
-        throw new System.NotImplementedException();
+        //
     }
 }

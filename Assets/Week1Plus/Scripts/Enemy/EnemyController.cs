@@ -20,7 +20,16 @@ public class EnemyController : MonoBehaviour
             _healthTotalCount = value;
             if (_healthTotalCount <= 0)
             {
-                KillEnemy();
+                if (!_bossEnemy)
+                {
+                    KillEnemy(true);
+                }
+                else
+                {
+                    GameManager.Instance.isBossSpawned = false;
+                    GameManager.Instance.Camera.SetCameraTarget(GameManager.Instance.Player.gameObject);
+                    KillEnemy(false);
+                }
             }
         }
     }
@@ -106,9 +115,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void KillEnemy()
+    public void KillEnemy(bool isSpawnable)
     {
-        GameManager.Instance.SpawnManager.SpawnItem(transform);
+        
+        if (isSpawnable)
+        {
+            GameManager.Instance.SpawnManager.SpawnItem(transform);
+        }
+        GameManager.Instance.SpawnManager.RemoveSpawnedEnemy(this);
         Destroy(gameObject);
     }
     
