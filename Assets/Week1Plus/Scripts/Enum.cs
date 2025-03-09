@@ -7,7 +7,7 @@ namespace EnumTypes
         Start,
         Choose,
         Play,
-        End,
+        Score,
     }
     
     public enum ItemType

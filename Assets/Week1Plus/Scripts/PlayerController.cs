@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerAttack playerAttack;
+    public PlayerNotifier PlayerNotifier;
     public bool IsBossState;
     
     [Header("Health")]
@@ -134,6 +133,6 @@ public class PlayerController : MonoBehaviour
 
     private void KillPlayer()
     {
-        //
+        
     }
 }

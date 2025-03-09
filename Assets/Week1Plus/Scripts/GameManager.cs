@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     
     public bool isBossSpawned = false;
     
+    
+    
     private void Awake()
     {
         if (Instance == null)
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartCount(int seconds, int bossIndex)
     {
         yield return new WaitForSeconds(seconds);
+        
         SpawnManager.SpawnBossEnemy(bossIndex);
         for (var i = SpawnManager.SpawnedEnemyList.Count - 1; i >= 0; i--)
         {

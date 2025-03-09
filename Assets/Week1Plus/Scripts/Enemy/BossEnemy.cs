@@ -19,6 +19,8 @@ public class BossEnemy : EnemyController
 
         healthSlider.maxValue = healthMaxCount;
         healthSlider.value = healthMaxCount;
+        
+        GameManager.Instance.Player.PlayerNotifier.SetBossObject(gameObject);
     }
 
     protected override void Update()
@@ -33,7 +35,8 @@ public class BossEnemy : EnemyController
 
     public IEnumerator MoveRoutine()
     {
-        while (GameManager.Instance.Player.IsBossState)
+        // while (GameManager.Instance.Player.IsBossState)
+        while (true)
         {
             yield return new WaitForSeconds(3f);
         

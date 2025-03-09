@@ -1,4 +1,5 @@
 using System.Collections;
+using EnumTypes;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -58,10 +59,39 @@ public class CameraController : MonoBehaviour
     public void SetCameraTarget(GameObject newTarget)
     {
         _target = newTarget;
-        StartCoroutine(ChangeFocusToTarget(_target.transform));
+        
+        if (newTarget == player)
+        {
+            StartCoroutine(ChangeFocusToPlayer(_target.transform));
+
+        }
+        else
+        {
+            StartCoroutine(ChangeFocusToTarget(_target.transform));
+        }
     }
     
     private IEnumerator ChangeFocusToTarget(Transform newTarget)
+    {
+        IsTransitioning = true;
+        GameManager.Instance.Player.PlayerNotifier.SetBossNotifier(false);
+        
+        var startPosition = transform.position;
+        var targetPosition = new Vector3(newTarget.position.x, newTarget.position.y, -10);
+        var t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * transitionSpeed;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        IsTransitioning = false;
+        GameManager.Instance.Player.IsBossState = true;
+    }
+    
+    private IEnumerator ChangeFocusToPlayer(Transform newTarget)
     {
         IsTransitioning = true;
         
@@ -77,7 +107,7 @@ public class CameraController : MonoBehaviour
         }
 
         IsTransitioning = false;
-        GameManager.Instance.Player.IsBossState = true;
+        GameManager.Instance.ChangeGameState(GameState.Score);
     }
     
     public IEnumerator ShakeCameraCo()
