@@ -5,7 +5,7 @@ namespace EnumTypes
     {
         None,
         Start,
-        ChooseBoss,
+        Choose,
         Play,
         End,
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using EnumTypes;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public SpawnManager SpawnManager;
 
-    public int Stage = 0;
+    public int CurrentBossIndex = -1;
 
     public int totalScoreCount = 0;
     
@@ -28,19 +29,25 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-        currentGameState = GameState.Play;
-        UIManager.ChangeUI(currentGameState);
-        StartCoroutine(StartCount(1));
-        StartCoroutine(SpawnEnemy(10));
-    }
     
     public void IncreaseScore(int score)
     {
         totalScoreCount += score;
         UIManager.UpdateScore(totalScoreCount);
+    }
+
+    public void ChangeGameState(GameState newGameState)
+    {
+        currentGameState = newGameState;
+        UIManager.ChangeUI(currentGameState);
+    }
+    public void StartPlayGame(int bossIndex)
+    {
+        CurrentBossIndex = bossIndex;
+        currentGameState = GameState.Play;
+        UIManager.ChangeUI(currentGameState);
+        StartCoroutine(StartCount(5, bossIndex));
+        StartCoroutine(SpawnEnemy(10));
     }
 
     private IEnumerator SpawnEnemy(int count)
@@ -54,10 +61,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartCount(int seconds)
+    private IEnumerator StartCount(int seconds, int bossIndex)
     {
         yield return new WaitForSeconds(seconds);
-        SpawnManager.SpawnBossEnemy(0);
+        SpawnManager.SpawnBossEnemy(bossIndex);
         for (var i = SpawnManager.SpawnedEnemyList.Count - 1; i >= 0; i--)
         {
             SpawnManager.SpawnedEnemyList[i].KillEnemy(false);

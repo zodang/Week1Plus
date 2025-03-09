@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     GameManager.Instance.isBossSpawned = false;
+                    GameManager.Instance.Player.IsBossState = false;
                     GameManager.Instance.Camera.SetCameraTarget(GameManager.Instance.Player.gameObject);
                     KillEnemy(false);
                 }
@@ -117,7 +118,6 @@ public class EnemyController : MonoBehaviour
 
     public void KillEnemy(bool isSpawnable)
     {
-        
         if (isSpawnable)
         {
             GameManager.Instance.SpawnManager.SpawnItem(transform);

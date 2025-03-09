@@ -33,7 +33,7 @@ public class BossEnemy : EnemyController
 
     public IEnumerator MoveRoutine()
     {
-        while (true)
+        while (GameManager.Instance.Player.IsBossState)
         {
             yield return new WaitForSeconds(3f);
         
