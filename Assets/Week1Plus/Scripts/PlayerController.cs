@@ -1,7 +1,10 @@
+using EnumTypes;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool _canMove = true;
+
     public PlayerAttack playerAttack;
     public PlayerNotifier PlayerNotifier;
     public bool IsBossState;
@@ -31,8 +34,6 @@ public class PlayerController : MonoBehaviour
     
     
     private Vector2 _movement;
-
-    private bool _canMove = true;
     
     private float constraintXValue = 16;
     private float constraintYValue = 10;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
             // Basic enemy
             if (!enemy.IsBossEnemy())
             {
-                enemy.KillEnemy(false);
+                enemy.KillEnemy(false, true);
             }
             
             HealthTotalCount--;
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ActivatePlayerMovement(bool canMove)
+    public void StartPlayerMove(bool canMove)
     {
         _canMove = canMove;
         rigidbody.linearVelocity = Vector2.zero;
@@ -133,6 +134,6 @@ public class PlayerController : MonoBehaviour
 
     private void KillPlayer()
     {
-        
+        GameManager.Instance.ChangeGameState(GameState.Score);
     }
 }

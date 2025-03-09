@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private GameManager _gameManager;
     [SerializeField] private GameObject player;
     private GameObject _target;
     
@@ -19,17 +20,13 @@ public class CameraController : MonoBehaviour
         set
         {
             _isTransitioning = value;
-            GameManager.Instance.Player.ActivatePlayerMovement(!_isTransitioning);
+            _gameManager.Player.StartPlayerMove(!_isTransitioning);
         }
     }
-    
-    private float MakeDamageFXMagnitude(){
-        return Random.Range(-0.2f, 0.2f);
-    }
-
 
     void Start()
     {
+        _gameManager = GameManager.Instance;
         _target = player;
     }
     
@@ -48,6 +45,12 @@ public class CameraController : MonoBehaviour
             transform.position += _damangeFXPosition;
         }
     }
+    
+    private float MakeDamageFXMagnitude()
+    {
+        return Random.Range(-0.2f, 0.2f);
+    }
+
 
     private void FollowPlayer()
     {
@@ -74,7 +77,7 @@ public class CameraController : MonoBehaviour
     private IEnumerator ChangeFocusToTarget(Transform newTarget)
     {
         IsTransitioning = true;
-        GameManager.Instance.Player.PlayerNotifier.SetBossNotifier(false);
+        _gameManager.Player.PlayerNotifier.SetBossNotifier(false);
         
         var startPosition = transform.position;
         var targetPosition = new Vector3(newTarget.position.x, newTarget.position.y, -10);
@@ -88,7 +91,8 @@ public class CameraController : MonoBehaviour
         }
 
         IsTransitioning = false;
-        GameManager.Instance.Player.IsBossState = true;
+        _gameManager.Player.IsBossState = true;
+        _gameManager.SpawnManager.SpawnedBossEnemy.StartDamage(true);
 
     }
     
@@ -108,7 +112,7 @@ public class CameraController : MonoBehaviour
         }
 
         IsTransitioning = false;
-        GameManager.Instance.ChangeGameState(GameState.Score);
+        _gameManager.ChangeGameState(GameState.Score);
     }
     
     public IEnumerator ShakeCameraCo()

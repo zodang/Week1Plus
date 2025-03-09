@@ -4,16 +4,19 @@ using EnumTypes;
 
 public class EnemyController : MonoBehaviour
 {
+    private bool _canDamage = false;
+
+    protected GameManager gameManager;
     [SerializeField] private EnemyType enemyType;
     private BossEnemy _bossEnemy;
     
     protected Transform Player;
     protected Rigidbody2D Rigidbody;
+    [SerializeField] private int score = 1;
     
     [Header("Health")]
     public int HealthTotalCount
     {
-        
         get => _healthTotalCount;
         set
         {
@@ -22,14 +25,14 @@ public class EnemyController : MonoBehaviour
             {
                 if (!_bossEnemy)
                 {
-                    KillEnemy(true);
+                    KillEnemy(true, true);
                 }
                 else
                 {
-                    GameManager.Instance.isBossSpawned = false;
-                    GameManager.Instance.Player.IsBossState = false;
-                    GameManager.Instance.Camera.SetCameraTarget(GameManager.Instance.Player.gameObject);
-                    KillEnemy(false);
+                    gameManager.isBossSpawned = false;
+                    gameManager.Player.IsBossState = false;
+                    gameManager.Camera.SetCameraTarget(gameManager.Player.gameObject);
+                    KillEnemy(false, true);
                 }
             }
         }
@@ -48,6 +51,7 @@ public class EnemyController : MonoBehaviour
     
     protected virtual void Start()
     {
+        gameManager = GameManager.Instance;
         Rigidbody = GetComponent<Rigidbody2D>();
         HealthTotalCount = healthMaxCount;
         
@@ -60,6 +64,8 @@ public class EnemyController : MonoBehaviour
         {
             StartCoroutine(MoveRoutine());
         }
+        
+        StartDamage(true);
     }
     
     private IEnumerator MoveRoutine()
@@ -104,10 +110,19 @@ public class EnemyController : MonoBehaviour
             Rigidbody.linearVelocity = _moveDirection * moveSpeed;
         }
     }
-    
+
+    public void StartDamage(bool can)
+    {
+        _canDamage = can;
+    }
     
     public void DamageEnemy(int damage)
     {
+        if (!_canDamage)
+        {
+            return;
+        }
+        
         HealthTotalCount -= damage;
 
         if (_bossEnemy)
@@ -116,13 +131,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void KillEnemy(bool isSpawnable)
+    public void KillEnemy(bool isSpawnable, bool isAbleToGet)
     {
         if (isSpawnable)
         {
-            GameManager.Instance.SpawnManager.SpawnItem(transform);
+            gameManager.SpawnManager.SpawnItem(transform);
         }
-        GameManager.Instance.SpawnManager.RemoveSpawnedEnemy(this);
+        gameManager.SpawnManager.RemoveSpawnedEnemy(this);
+
+        if (isAbleToGet)
+        {
+            gameManager.IncreaseScore(score);
+        }
         Destroy(gameObject);
     }
     

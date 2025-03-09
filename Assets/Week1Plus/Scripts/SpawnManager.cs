@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -43,7 +44,7 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnedEnemyList.Remove(enemy);
     }
-
+    
     public void SpawnBossEnemy(int index)
     {
         var randomPos = SetRandomPosition(enemySpawnRange.x, enemySpawnRange.y);
@@ -59,4 +60,30 @@ public class SpawnManager : MonoBehaviour
         
         return spawnPosition;
     }
+
+    public void DespawnAllEnemies()
+    {
+        for (var i = SpawnedEnemyList.Count - 1; i >= 0; i--)
+        {
+            SpawnedEnemyList[i].KillEnemy(false, false);
+        }
+    }
+    
+    public void DespawnAllItems()
+    {
+        foreach (var item in SpawnedItemList)
+        {
+            Destroy(item.GameObject());
+        }
+        SpawnedItemList.Clear();
+    }
+
+    public void DespawnBossEnemy()
+    {
+        if (bossEnemies != null)
+        {
+            Destroy(SpawnedBossEnemy.GameObject());
+        }
+    }
+
 }

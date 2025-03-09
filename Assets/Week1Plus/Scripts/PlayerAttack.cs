@@ -4,8 +4,8 @@ using UnityEngine.Serialization;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public GameObject ProjectileGroup;
-
+    private bool _canShoot = false;
+    
     [Header("projectile")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private GameObject projectilePrefab;
@@ -31,6 +31,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!_canShoot)
+        {
+            return;
+        }
+        
         if (Input.GetMouseButton(1))
         {
             if (_currentProjectile != null)
@@ -48,13 +53,23 @@ public class PlayerAttack : MonoBehaviour
 
         }
 
-        if (!Input.GetMouseButtonUp(1)) return;
+        if (!Input.GetMouseButtonUp(1))
+        {
+            return;
+        }
+        
         if (_currentProjectile != null)
         {
+            
             LaunchProjectile();
             UltimateTotalCount--;
             GameManager.Instance.UIManager.UpdateUltimate(UltimateTotalCount);
         }
+    }
+
+    public void StartPlayerShoot(bool can)
+    {
+        _canShoot = can;
     }
     
     private IEnumerator ShootProjectile()

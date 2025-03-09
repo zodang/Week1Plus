@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
+  score: 50
   healthMaxCount: 1
   rotationSpeed: 8
   moveSpeed: 5

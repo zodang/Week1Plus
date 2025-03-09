@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.Score:
                 scorePanel.SetActive(true);
-                UpdateTotalScore(_gameManager.totalScoreCount);
+                UpdateTotalScore(_gameManager.TotalScroeCount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
@@ -63,7 +63,12 @@ public class UIManager : MonoBehaviour
 
         AddListener();
         
-        UpdateScore(_gameManager.totalScoreCount);
+        
+    }
+
+    public void ResetPlayerSettingUI()
+    {
+        UpdateScore(_gameManager.TotalScroeCount);
         UpdateHealth(_gameManager.Player.HealthTotalCount);
         UpdateUltimate(_gameManager.Player.playerAttack.UltimateTotalCount);
     }
@@ -93,6 +98,7 @@ public class UIManager : MonoBehaviour
     private void OnClickStartBtn()
     {
         _gameManager.ChangeGameState(GameState.Choose);
+        _gameManager.ResetPlayerSetting();
     }
 
     #endregion
@@ -156,11 +162,12 @@ public class UIManager : MonoBehaviour
             totalScoreText.text = currentScore.ToString();
             yield return null;
         }
-        totalScoreText.text = endScore.ToString(); // 최종 점수 고정
+        totalScoreText.text = endScore.ToString();
     }
     
     private void OnClickGoToChooseUIBtn()
     {
+        _gameManager.ResetPlayerSetting();
         _gameManager.ChangeGameState(GameState.Choose);
     }
     

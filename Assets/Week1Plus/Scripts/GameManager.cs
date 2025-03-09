@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using EnumTypes;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,14 +12,16 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public SpawnManager SpawnManager;
 
+    [Header("Boss")]
     public int CurrentBossIndex = -1;
-
-    public int totalScoreCount = 0;
-    
     public bool isBossSpawned = false;
+
+    public int TotalScroeCount = 0; 
+    private int _TotalScoreCount => TotalScroeCount;
     
-    
-    
+    [SerializeField] private int initialHealthCount = 5;
+    [SerializeField] private int initialUltimateCount = 5;
+   
     private void Awake()
     {
         if (Instance == null)
@@ -31,25 +33,63 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
+    private void Start()
+    {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        ResetPlayerSetting();
+        ChangeGameState(GameState.Start);
+    }
+
     public void IncreaseScore(int score)
     {
-        totalScoreCount += score;
-        UIManager.UpdateScore(totalScoreCount);
+        TotalScroeCount += score;
+        UIManager.UpdateScore(_TotalScoreCount);
     }
 
     public void ChangeGameState(GameState newGameState)
     {
         currentGameState = newGameState;
+
+        switch (currentGameState)
+        {
+            case GameState.None:
+                break;
+            case GameState.Start:
+                Player.StartPlayerMove(true);
+                Player.playerAttack.StartPlayerShoot(true);
+                break;
+            case GameState.Choose:
+                Player.StartPlayerMove(false);
+                Player.playerAttack.StartPlayerShoot(false);
+                break;
+            case GameState.Play:
+                Player.StartPlayerMove(true);
+                Player.playerAttack.StartPlayerShoot(true);
+                break;
+            case GameState.Score:
+                Player.StartPlayerMove(false);
+                Player.playerAttack.StartPlayerShoot(false);
+                if (SpawnManager.SpawnedBossEnemy)
+                {
+                    SpawnManager.SpawnedBossEnemy.StartDamage(false);
+                }
+
+                break;  
+        }
+        
         UIManager.ChangeUI(currentGameState);
     }
     public void StartPlayGame(int bossIndex)
     {
         CurrentBossIndex = bossIndex;
-        currentGameState = GameState.Play;
-        UIManager.ChangeUI(currentGameState);
-        StartCoroutine(StartCount(5, bossIndex));
-        StartCoroutine(SpawnEnemy(1));
+        ChangeGameState(GameState.Play);
+        StartCoroutine(StartCount(30, bossIndex));
+        StartCoroutine(SpawnEnemy(10));
     }
 
     private IEnumerator SpawnEnemy(int count)
@@ -69,10 +109,20 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         
         SpawnManager.SpawnBossEnemy(bossIndex);
-        for (var i = SpawnManager.SpawnedEnemyList.Count - 1; i >= 0; i--)
-        {
-            SpawnManager.SpawnedEnemyList[i].KillEnemy(false);
-        }
+        SpawnManager.DespawnAllEnemies();
+    }
+
+    public void ResetPlayerSetting()
+    {
+        SpawnManager.DespawnAllEnemies();
+        SpawnManager.DespawnAllItems();
+        SpawnManager.DespawnBossEnemy();
+        
+        TotalScroeCount = 0;
+        Player.HealthTotalCount = initialHealthCount;
+        Player.playerAttack.UltimateTotalCount = initialUltimateCount;
+        
+        UIManager.ResetPlayerSettingUI();
     }
     
 }

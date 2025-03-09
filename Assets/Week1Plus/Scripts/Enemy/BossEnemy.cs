@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,12 +21,9 @@ public class BossEnemy : EnemyController
         healthSlider.maxValue = healthMaxCount;
         healthSlider.value = healthMaxCount;
         
-        GameManager.Instance.Player.PlayerNotifier.SetBossObject(gameObject);
-    }
-
-    protected override void Update()
-    {
-        // 
+        gameManager.Player.PlayerNotifier.SetBossObject(gameObject);
+        
+        StartDamage(false);
     }
 
     public void UpdateHealthBar()
@@ -35,13 +33,16 @@ public class BossEnemy : EnemyController
 
     public IEnumerator MoveRoutine()
     {
-        // while (GameManager.Instance.Player.IsBossState)
         while (true)
         {
             yield return new WaitForSeconds(3f);
         
             for (var i = 0; i < 3; i++)
             {
+                if (this == null)
+                {
+                    yield break;
+                }
                 var startPos = transform.position;
                 var randomDirection = Random.insideUnitCircle.normalized;
                 var targetPos = startPos + (Vector3)randomDirection * rushDistance;

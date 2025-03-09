@@ -10053,8 +10053,8 @@ MonoBehaviour:
   UIManager: {fileID: 1976105294}
   SpawnManager: {fileID: 1089280342}
   CurrentBossIndex: -1
-  totalScoreCount: 1000
   isBossSpawned: 0
+  TotalScoreCount: 0
 --- !u!1001 &2061990685977649773
 PrefabInstance:
   m_ObjectHideFlags: 0
