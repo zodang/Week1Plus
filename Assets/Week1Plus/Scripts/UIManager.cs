@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
         scoreText.text = $"{score}";
     }
     
-    private void UpdateUltimate(int ultimate)
+    public void UpdateUltimate(int ultimate)
     {
         ultimateCount.text = $"Ultimate: {ultimate}"; 
     }

@@ -8,7 +8,8 @@ public class BackgroundGrid : MonoBehaviour
     [SerializeField] Vector3 distWithPlayer;
     private float gridSize = 16f;
     // 0 for X, 1 for Y
-
+    
+    
     void Start()
     {
         player = GameObject.Find("Player");

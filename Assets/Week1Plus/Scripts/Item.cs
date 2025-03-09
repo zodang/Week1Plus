@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
 
     public void UseItem()
     {
+        GameManager.Instance.SpawnManager.RemoveSpawnedItem(this);
         switch (itemType)
         {
             case ItemType.None:
@@ -24,7 +25,5 @@ public class Item : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
-        GameManager.Instance.SpawnManager.RemoveSpawnedItem(this);
     }
 }

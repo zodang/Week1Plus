@@ -49,17 +49,18 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.Play;
         UIManager.ChangeUI(currentGameState);
         StartCoroutine(StartCount(5, bossIndex));
-        StartCoroutine(SpawnEnemy(10));
+        StartCoroutine(SpawnEnemy(1));
     }
 
     private IEnumerator SpawnEnemy(int count)
     {
         var spawndCount = 0;
-        while (spawndCount <= count && !isBossSpawned)
+        while (spawndCount <= count - 1)
         {
-            yield return new WaitForSeconds(0.5f);
             SpawnManager.SpawnEnemy();
             spawndCount++;
+            yield return new WaitForSeconds(0.5f);
+
         }
     }
 

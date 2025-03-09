@@ -64,8 +64,6 @@ public class BossEnemy : EnemyController
     }
     private Vector3 ClampToCameraBounds(Vector3 targetPos)
     {
-        if (Camera.main == null) return targetPos;
-
         var offset = 0.1f;
         var minBounds = Camera.main.ViewportToWorldPoint(new Vector3(offset, offset, transform.position.z));
         var maxBounds = Camera.main.ViewportToWorldPoint(new Vector3(1 - offset, 1 - offset, transform.position.z));

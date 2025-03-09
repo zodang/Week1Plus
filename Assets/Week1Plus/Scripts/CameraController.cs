@@ -89,6 +89,7 @@ public class CameraController : MonoBehaviour
 
         IsTransitioning = false;
         GameManager.Instance.Player.IsBossState = true;
+
     }
     
     private IEnumerator ChangeFocusToPlayer(Transform newTarget)
