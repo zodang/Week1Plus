@@ -25,8 +25,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject playPanel;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private Slider timerSlider;
     [SerializeField] private TMP_Text ultimateCount;
+    [SerializeField] private Slider ultimateSlider;
     [SerializeField] private TMP_Text healthCount;
+    [SerializeField] private Slider healthSlider;
     
     [Header("Score Panel")]
     [SerializeField] private GameObject scorePanel;
@@ -66,11 +69,15 @@ public class UIManager : MonoBehaviour
 
     public void ResetPlayerSettingUI()
     {
+        timerSlider.maxValue = _gameManager.LeftTime;
+        ultimateSlider.maxValue = 20;
+        healthSlider.maxValue = 20;
+        
         UpdateScore(_gameManager.TotalScroeCount);
         UpdateHealth(_gameManager.Player.HealthTotalCount);
         UpdateUltimate(_gameManager.Player.playerAttack.UltimateTotalCount);
     }
-
+    
     private void ActivateAllPanel(bool isActive)
     {
         startPanel.SetActive(isActive);
@@ -137,15 +144,22 @@ public class UIManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60);
         timerText.text = time <= 0 ? "00:00" : string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    public void UpdateTimerSlider(float time)
+    {
+        timerSlider.value = time;
+    }
     
     public void UpdateUltimate(int ultimate)
     {
-        ultimateCount.text = $"Ultimate: {ultimate}"; 
+        ultimateCount.text = $"Ult {ultimate}"; 
+        ultimateSlider.value = ultimate;
     }
 
     public void UpdateHealth(int health)
     {
-        healthCount.text = $"Health: {health}"; 
+        healthCount.text = $"Hp {health}"; 
+        healthSlider.value = health;
     }
     
     #endregion

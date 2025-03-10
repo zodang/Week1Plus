@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using EnumTypes;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     private bool _isCheckLeftTime = false;
     private bool _isCheckElapsedTime = false;
     
-    [SerializeField] private float leftTime = 15;
+    public float LeftTime = 15;
     private float _currentLeftTime;
     private float _elapsedTime;
     [SerializeField] private int basicEnemyCount = 20;
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void StartLeftTimer()
     {
-        _currentLeftTime = leftTime + 1;
+        _currentLeftTime = LeftTime + 1;
         _isCheckLeftTime = true;
     }
 
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         {
             _currentLeftTime -= Time.deltaTime;
             UIManager.UpdateTimerText(_currentLeftTime);
+            UIManager.UpdateTimerSlider(_currentLeftTime);
             yield return null;
         }
     }
@@ -145,7 +147,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemyCo(basicEnemyCount));
         
         StartLeftTimer();
-        StartCoroutine(SpawnBossEnemyCo(leftTime, bossIndex));
+        StartCoroutine(SpawnBossEnemyCo(LeftTime, bossIndex));
     }
 
     private IEnumerator SpawnEnemyCo(int count)
@@ -177,7 +179,7 @@ public class GameManager : MonoBehaviour
         Player.HealthTotalCount = initialHealthCount;
         Player.playerAttack.UltimateTotalCount = initialUltimateCount;
 
-        _currentLeftTime = leftTime;
+        _currentLeftTime = LeftTime;
         _elapsedTime = 0;
         
         Camera.ChangeTarget(Player.gameObject);

@@ -56,10 +56,10 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
-        
+
+
         if (_currentProjectile != null)
         {
-            
             LaunchProjectile();
             UltimateTotalCount--;
             GameManager.Instance.UIManager.UpdateUltimate(UltimateTotalCount);
@@ -73,9 +73,15 @@ public class PlayerAttack : MonoBehaviour
     
     private IEnumerator ShootProjectile()
     {
+        
         while (true)
         {
-            Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) ||
+                Input.GetKey(KeyCode.D))
+            {
+                Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+            }
+
             yield return new WaitForSeconds(fireRate);
         }
     }

@@ -22,6 +22,11 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnItem(Transform spawnPoint)
     {
+        if (Random.value < 0.3f)
+        {
+            return;
+        }
+        
         var newItem = Instantiate(Items[Random.Range(0, Items.Length)], spawnPoint.position, Quaternion.identity, ItemGroup.transform);
         SpawnedItemList.Add(newItem);
     }

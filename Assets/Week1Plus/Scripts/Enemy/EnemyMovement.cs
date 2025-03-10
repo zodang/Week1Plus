@@ -36,11 +36,12 @@ public class EnemyMovement : MonoBehaviour
     {
         _type = type;
         
+        
         if (!gameObject.activeInHierarchy)
         {
             gameObject.SetActive(true);
         }
-
+        
         switch (_type)
         {
             case EnemyType.None:
@@ -52,7 +53,6 @@ public class EnemyMovement : MonoBehaviour
                 StartCoroutine(BasicDashMoveCo());
                 break;
             case EnemyType.DashBoss:
-                
                 StartCoroutine(DashMoveCo());
                 break;
             case EnemyType.BlackHole:
