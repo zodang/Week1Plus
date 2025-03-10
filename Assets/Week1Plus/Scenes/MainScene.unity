@@ -3082,6 +3082,7 @@ MonoBehaviour:
   - {fileID: -5617718178553369617, guid: dd0cf883cadbb3d42a4926a6d1dba18f, type: 3}
   - {fileID: -5617718178553369617, guid: 72c0e90c5073d974ea117430a94e0778, type: 3}
   - {fileID: -5617718178553369617, guid: 9f407df9f9cda6d43942bc709be02c14, type: 3}
+  - {fileID: -5617718178553369617, guid: 9f407df9f9cda6d43942bc709be02c14, type: 3}
   SpawnedEnemyList: []
   enemySpawnRange: {x: 12, y: 20}
   bossEnemies:

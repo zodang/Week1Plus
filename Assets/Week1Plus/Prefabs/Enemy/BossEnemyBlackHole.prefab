@@ -291,6 +291,7 @@ Transform:
   - {fileID: 1523562161417449077}
   - {fileID: 8380900136288738411}
   - {fileID: 8582170231658377948}
+  - {fileID: 7669631545590980403}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &484177703972530780
@@ -331,13 +332,14 @@ MonoBehaviour:
   dashCount: 3
   dashSpeed: 25
   rushDistance: 10
-  LaserMovement: {fileID: 0}
   laserPrefab: {fileID: 0}
   growSpeed: 3
   laserDuration: 1.5
-  maxLaserDistance: 20
+  basicLaserDistance: 5
+  bossLaserDistance: 20
   laserRate: 3
   laserRange: 8
+  _canFire: 0
 --- !u!50 &7926647595969934840
 Rigidbody2D:
   serializedVersion: 5
@@ -519,6 +521,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2240032509519267656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7669631545590980403}
+  m_Layer: 3
+  m_Name: BlackHole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7669631545590980403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2240032509519267656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6364692410102873827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2249750463974122468
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ TagManager:
   - BossZone
   - Ultimate
   - Item
+  - Laser
   layers:
   - Default
   - TransparentFX

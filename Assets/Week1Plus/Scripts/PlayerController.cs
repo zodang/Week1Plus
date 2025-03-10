@@ -68,6 +68,13 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(GameManager.Instance.Camera.ShakeCameraCo());
         }
 
+        if (collision.CompareTag("Laser"))
+        {
+            HealthTotalCount--;
+            StartCoroutine(GameManager.Instance.Camera.ShakeCameraCo());
+        }
+
+
         if (collision.CompareTag("Item"))
         {
             var item = collision.GetComponent<Item>();
