@@ -29,7 +29,12 @@ public class CameraController : MonoBehaviour
         _gameManager = GameManager.Instance;
         _target = player;
     }
-    
+
+
+    public void ChangeTarget(GameObject newTarget)
+    {
+        _target = newTarget;
+    }
     void Update()
     {
         // Camera Shaking 
@@ -58,7 +63,7 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10) +
                              _damangeFXPosition;
     }
-
+    
     public void SetCameraTarget(GameObject newTarget)
     {
         _target = newTarget;
@@ -92,6 +97,7 @@ public class CameraController : MonoBehaviour
 
         IsTransitioning = false;
         _gameManager.Player.IsBossState = true;
+        _gameManager.StartElapsedTimer();
         _gameManager.SpawnManager.SpawnedBossEnemy.StartDamage(true);
 
     }

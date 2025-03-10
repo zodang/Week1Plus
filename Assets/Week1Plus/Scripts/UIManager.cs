@@ -20,11 +20,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button laserBossBtn;
     [SerializeField] private Button blackHoleBossBtn;
     [SerializeField] private Button goToStartUIBtn;
-
     
     [Header("Play Panel")]
     [SerializeField] private GameObject playPanel;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text ultimateCount;
     [SerializeField] private TMP_Text healthCount;
     
@@ -62,8 +62,6 @@ public class UIManager : MonoBehaviour
         _gameManager = GameManager.Instance;
 
         AddListener();
-        
-        
     }
 
     public void ResetPlayerSettingUI()
@@ -133,6 +131,13 @@ public class UIManager : MonoBehaviour
         scoreText.text = $"{score}";
     }
     
+    public void UpdateTimerText(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+        timerText.text = time <= 0 ? "00:00" : string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    
     public void UpdateUltimate(int ultimate)
     {
         ultimateCount.text = $"Ultimate: {ultimate}"; 
@@ -142,8 +147,8 @@ public class UIManager : MonoBehaviour
     {
         healthCount.text = $"Health: {health}"; 
     }
-    #endregion
     
+    #endregion
     
     #region ScorePanel
 

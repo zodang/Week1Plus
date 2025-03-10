@@ -80,7 +80,7 @@ public class SpawnManager : MonoBehaviour
 
     public void DespawnBossEnemy()
     {
-        if (bossEnemies != null)
+        if (SpawnedBossEnemy != null)
         {
             Destroy(SpawnedBossEnemy.GameObject());
         }

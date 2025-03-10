@@ -26,12 +26,10 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private int healthMaxCount = 5;
     private int _healthTotalCount;
-
     
     [Header("Movement")]
     [SerializeField] private Rigidbody2D rigidbody;
     [SerializeField] private float moveSpeed = 5f;
-    
     
     private Vector2 _movement;
     

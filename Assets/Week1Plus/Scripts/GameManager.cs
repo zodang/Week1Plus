@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using EnumTypes;
@@ -21,6 +20,14 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private int initialHealthCount = 5;
     [SerializeField] private int initialUltimateCount = 5;
+
+    private bool _isCheckLeftTime = false;
+    private bool _isCheckElapsedTime = false;
+    
+    [SerializeField] private float leftTime = 15;
+    private float _currentLeftTime;
+    private float _elapsedTime;
+    [SerializeField] private int basicEnemyCount = 20;
    
     private void Awake()
     {
@@ -37,6 +44,53 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
+    }
+
+    private void Update()
+    {
+        if (_isCheckLeftTime)
+        {
+            StartCoroutine(StartLeftTimerCo());
+            _isCheckLeftTime = false;
+        }
+
+        if (_isCheckElapsedTime)
+        {
+            StartCoroutine(StartElapsedTimerCo());
+            _isCheckElapsedTime = false;
+        }
+    }
+
+    public void StartLeftTimer()
+    {
+        _currentLeftTime = leftTime + 1;
+        _isCheckLeftTime = true;
+    }
+
+    public void StartElapsedTimer()
+    {
+        _elapsedTime = 0;
+        _isCheckElapsedTime = true;
+    }
+
+    private IEnumerator StartLeftTimerCo()
+    {
+        while (_currentLeftTime > 0)
+        {
+            _currentLeftTime -= Time.deltaTime;
+            UIManager.UpdateTimerText(_currentLeftTime);
+            yield return null;
+        }
+    }
+    
+    private IEnumerator StartElapsedTimerCo()
+    {
+        while (Player.IsBossState)
+        {
+            _elapsedTime += Time.deltaTime;
+            UIManager.UpdateTimerText(_elapsedTime);
+            yield return null;
+        }
     }
 
     private void StartGame()
@@ -88,11 +142,13 @@ public class GameManager : MonoBehaviour
     {
         CurrentBossIndex = bossIndex;
         ChangeGameState(GameState.Play);
-        StartCoroutine(StartCount(30, bossIndex));
-        StartCoroutine(SpawnEnemy(10));
+        StartCoroutine(SpawnEnemyCo(basicEnemyCount));
+        
+        StartLeftTimer();
+        StartCoroutine(SpawnBossEnemyCo(leftTime, bossIndex));
     }
 
-    private IEnumerator SpawnEnemy(int count)
+    private IEnumerator SpawnEnemyCo(int count)
     {
         var spawndCount = 0;
         while (spawndCount <= count - 1)
@@ -100,11 +156,10 @@ public class GameManager : MonoBehaviour
             SpawnManager.SpawnEnemy();
             spawndCount++;
             yield return new WaitForSeconds(0.5f);
-
         }
     }
 
-    private IEnumerator StartCount(int seconds, int bossIndex)
+    private IEnumerator SpawnBossEnemyCo(float seconds, int bossIndex)
     {
         yield return new WaitForSeconds(seconds);
         
@@ -121,6 +176,12 @@ public class GameManager : MonoBehaviour
         TotalScroeCount = 0;
         Player.HealthTotalCount = initialHealthCount;
         Player.playerAttack.UltimateTotalCount = initialUltimateCount;
+
+        _currentLeftTime = leftTime;
+        _elapsedTime = 0;
+        
+        Camera.ChangeTarget(Player.gameObject);
+        Player.PlayerNotifier.SetBossNotifier(false);
         
         UIManager.ResetPlayerSettingUI();
     }
