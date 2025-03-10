@@ -143,20 +143,23 @@ public class GameManager : MonoBehaviour
     {
         CurrentBossIndex = bossIndex;
         ChangeGameState(GameState.Play);
-        StartCoroutine(SpawnEnemyCo(basicEnemyCount));
         
         StartLeftTimer();
         StartCoroutine(SpawnBossEnemyCo(LeftTime, bossIndex));
-    }
+        StartCoroutine(SpawnBasicEnemyCo());
 
-    private IEnumerator SpawnEnemyCo(int count)
-    {
-        var spawndCount = 0;
-        while (spawndCount <= count - 1)
+        for (var i = 0; i < basicEnemyCount; i++)
         {
             SpawnManager.SpawnRandomEnemy();
-            spawndCount++;
-            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private IEnumerator SpawnBasicEnemyCo()
+    {
+        while (_currentLeftTime > 0)
+        {
+            SpawnManager.SpawnRandomEnemy();
+            yield return new WaitForSeconds(1);
         }
     }
 

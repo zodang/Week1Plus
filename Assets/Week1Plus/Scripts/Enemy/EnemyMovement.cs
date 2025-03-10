@@ -52,6 +52,7 @@ public class EnemyMovement : MonoBehaviour
                 StartFiringLaser();
                 break;
             case EnemyType.BasicBlackHole:
+                StartCoroutine(BasicMoveRoutine());
                 break;
             case EnemyType.BossDash:
                 StartCoroutine(BossDashMoveCo());

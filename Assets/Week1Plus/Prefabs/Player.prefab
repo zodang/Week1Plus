@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 4497136772192143483}
   - component: {fileID: 6538045274195806384}
   - component: {fileID: 5145926872150438772}
+  - component: {fileID: 2547758261356036244}
   - component: {fileID: 2079149033500996069}
   - component: {fileID: 7134358197922547087}
   m_Layer: 0
@@ -168,6 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66e3b99287050f4095afc754b974896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttack: {fileID: 5145926872150438772}
+  PlayerNotifier: {fileID: 2547758261356036244}
+  IsBossState: 0
+  healthMaxCount: 5
   rigidbody: {fileID: 2079149033500996069}
   moveSpeed: 8
 --- !u!114 &5145926872150438772
@@ -187,11 +192,26 @@ MonoBehaviour:
   fireRate: 0.3
   coolDown: 0
   damage: 5
-  projectileSpeed: 10
-  misilePrefab: {fileID: 4355679120482406697, guid: 266b7c2026129e943ae4d2fc254ffcd0, type: 3}
+  projectileSpeed: 20
+  UltimateTotalCount: 10
+  ultimatePrefab: {fileID: 4355679120482406697, guid: 266b7c2026129e943ae4d2fc254ffcd0, type: 3}
   spawnDistance: 1.5
-  rotationSpeed: 100
-  launchSpeed: 15
+  rotationSpeed: 200
+  launchSpeed: 30
+--- !u!114 &2547758261356036244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222036251659840267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739ecfa95d6be3546942f4ec2bd0ddb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossNotifier: {fileID: 0}
+  _bossObject: {fileID: 0}
 --- !u!50 &2079149033500996069
 Rigidbody2D:
   serializedVersion: 5

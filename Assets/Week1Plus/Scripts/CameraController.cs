@@ -76,7 +76,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            _gameManager.SpawnManager.DespawnAllEnemies();
+            
             StartCoroutine(ChangeFocusToTarget(_target.transform));
         }
     }
