@@ -75,6 +75,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
+            _gameManager.SpawnManager.DespawnAllEnemies();
             StartCoroutine(ChangeFocusToTarget(_target.transform));
         }
     }
@@ -98,6 +99,7 @@ public class CameraController : MonoBehaviour
         IsTransitioning = false;
         _gameManager.Player.IsBossState = true;
         _gameManager.StartElapsedTimer();
+        
         _gameManager.SpawnManager.SpawnedBossEnemy.StartDamage(true);
 
     }

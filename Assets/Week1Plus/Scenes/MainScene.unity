@@ -2531,6 +2531,7 @@ MonoBehaviour:
   SpawnedItemList: []
   Enemies:
   - {fileID: -5617718178553369617, guid: dd0cf883cadbb3d42a4926a6d1dba18f, type: 3}
+  - {fileID: -5617718178553369617, guid: 72c0e90c5073d974ea117430a94e0778, type: 3}
   SpawnedEnemyList: []
   enemySpawnRange: {x: 12, y: 20}
   bossEnemies:
@@ -10194,7 +10195,7 @@ MonoBehaviour:
   TotalScroeCount: 0
   initialHealthCount: 5
   initialUltimateCount: 5
-  leftTime: 1
+  leftTime: 15
   basicEnemyCount: 20
 --- !u!1001 &2061990685977649773
 PrefabInstance:

@@ -14,6 +14,6 @@ public class BasicEnemy : EnemyController
             return;
         }
 
-        EnemyMovement.ChasePlayer();
+        // EnemyMovement.ChasePlayer();
     }
 }

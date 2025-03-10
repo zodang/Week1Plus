@@ -50,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
                 _rotateDirection = -1;
                 SpawnProjectile();
             }
-
         }
 
         if (!Input.GetMouseButtonUp(1))
@@ -85,8 +84,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_currentProjectile == null)
         {
-            // gm.missileAmount -= 1;
-            // UIManager.instance.UpdateMissile();
             Vector3 spawnPos = transform.position + Vector3.up * spawnDistance;
 
             _currentProjectile = Instantiate(ultimatePrefab, spawnPos, Quaternion.identity);

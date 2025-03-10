@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using EnumTypes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class BossEnemy : EnemyController
 {

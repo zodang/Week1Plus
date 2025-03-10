@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         var spawndCount = 0;
         while (spawndCount <= count - 1)
         {
-            SpawnManager.SpawnEnemy();
+            SpawnManager.SpawnRandomEnemy();
             spawndCount++;
             yield return new WaitForSeconds(0.5f);
         }

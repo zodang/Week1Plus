@@ -22,7 +22,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private int dashCount = 3;
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float rushDistance = 10f;
-
     
     private Transform _player;
     private Rigidbody2D _rigidbody;
@@ -36,7 +35,11 @@ public class EnemyMovement : MonoBehaviour
     public void StartMovement(EnemyType type)
     {
         _type = type;
-        Debug.Log($"@@DE ---> Type : {_type}");
+        
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
 
         switch (_type)
         {
@@ -46,8 +49,10 @@ public class EnemyMovement : MonoBehaviour
                 StartCoroutine(BasicMoveRoutine());
                 break;
             case EnemyType.DashBasic:
+                StartCoroutine(BasicDashMoveCo());
                 break;
             case EnemyType.DashBoss:
+                
                 StartCoroutine(DashMoveCo());
                 break;
             case EnemyType.BlackHole:
@@ -128,14 +133,40 @@ public class EnemyMovement : MonoBehaviour
 
     #endregion
 
-    #region DashBoss
+    #region DashBasic
 
-    public IEnumerator DashMoveCo()
+    public IEnumerator BasicDashMoveCo()
     {
         while (true)
         {
             yield return new WaitForSeconds(dashDelayCount);
         
+            for (var i = 0; i < dashCount; i++)
+            {
+                if (this == null)
+                {
+                    yield break;
+                }
+
+                var limitBoundary = GameManager.Instance.SpawnManager.SpawnedBossEnemy;
+                var targetPos = CalculateDashPosition(limitBoundary);
+                StartCoroutine(Move(targetPos));
+                
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+    }
+
+    #endregion
+
+    #region DashBoss
+    public IEnumerator DashMoveCo()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(dashDelayCount);
+            GameManager.Instance.SpawnManager.SpawnEnemy(1, GameManager.Instance.SpawnManager.SetRandomPosition(5, 7));
+            
             for (var i = 0; i < dashCount; i++)
             {
                 if (this == null)

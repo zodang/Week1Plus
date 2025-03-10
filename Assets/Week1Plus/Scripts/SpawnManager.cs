@@ -32,10 +32,16 @@ public class SpawnManager : MonoBehaviour
         Destroy(item.gameObject);
     }
 
-    public void SpawnEnemy()
+    public void SpawnRandomEnemy()
     {
         var randomPos = SetRandomPosition(enemySpawnRange.x, enemySpawnRange.y);
         var newEnemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], randomPos, Quaternion.identity, EnemyGroup.transform);
+        SpawnedEnemyList.Add(newEnemy);
+    }
+
+    public void SpawnEnemy(int index, Vector3 spawnPoint)
+    {
+        var newEnemy = Instantiate(Enemies[index], spawnPoint, Quaternion.identity, EnemyGroup.transform);
         SpawnedEnemyList.Add(newEnemy);
     }
 
@@ -51,7 +57,7 @@ public class SpawnManager : MonoBehaviour
         GameManager.Instance.isBossSpawned = true;
     }
     
-    private Vector3 SetRandomPosition(float minRadius, float maxRadius)
+    public Vector3 SetRandomPosition(float minRadius, float maxRadius)
     {
         var randomDirection = Random.insideUnitCircle.normalized;
         var randomDistance = Random.Range(minRadius, maxRadius);
