@@ -6,7 +6,6 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject EnemyGroup;
     public GameObject ItemGroup;
-    public BackgroundGrid BackgroundGrid;
 
     [Header("Item")]
     [SerializeField] private Item[] Items;

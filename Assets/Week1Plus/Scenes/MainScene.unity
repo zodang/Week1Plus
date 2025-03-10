@@ -2525,13 +2525,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyGroup: {fileID: 1494196430}
   ItemGroup: {fileID: 425453305}
-  BackgroundGrid: {fileID: 2011632537}
   Items:
   - {fileID: 5724183043408375432, guid: 0d954aa8d38f59848935c14bfd36744e, type: 3}
   - {fileID: 3737404031301352069, guid: 0bc133f82f6b70d469459f63c6b802ff, type: 3}
   SpawnedItemList: []
   Enemies:
-  - {fileID: 844602451441320443, guid: dd0cf883cadbb3d42a4926a6d1dba18f, type: 3}
+  - {fileID: -5617718178553369617, guid: dd0cf883cadbb3d42a4926a6d1dba18f, type: 3}
   SpawnedEnemyList: []
   enemySpawnRange: {x: 12, y: 20}
   bossEnemies:
@@ -9709,7 +9708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2011632538
 Transform:
   m_ObjectHideFlags: 0
@@ -10195,7 +10194,7 @@ MonoBehaviour:
   TotalScroeCount: 0
   initialHealthCount: 5
   initialUltimateCount: 5
-  leftTime: 5
+  leftTime: 1
   basicEnemyCount: 20
 --- !u!1001 &2061990685977649773
 PrefabInstance:

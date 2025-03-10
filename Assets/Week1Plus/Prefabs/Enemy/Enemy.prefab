@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9104206977761034714}
-  - component: {fileID: 844602451441320443}
+  - component: {fileID: -5617718178553369617}
+  - component: {fileID: 3513883006931419382}
   - component: {fileID: 6725635248580317566}
   - component: {fileID: 2775481827837913462}
   - component: {fileID: 279583585406915817}
@@ -35,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &844602451441320443
+--- !u!114 &-5617718178553369617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,14 +45,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2098732464884726025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60dfc28ec3d77814ba3ee55f5494ccdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 948dc3349e53d0b408d558ac0bf85689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 1
   score: 50
   healthMaxCount: 1
-  rotationSpeed: 8
+  EnemyMovement: {fileID: 3513883006931419382}
+  chaseRange: 5
+--- !u!114 &3513883006931419382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098732464884726025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406dce1768fde5e4f898a10f7098606c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   moveSpeed: 5
+  rotationSpeed: 8
   moveTime: 0.7
   restTime: 1
 --- !u!212 &6725635248580317566

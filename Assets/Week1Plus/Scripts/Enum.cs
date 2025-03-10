@@ -20,7 +20,9 @@ namespace EnumTypes
     public enum EnemyType
     {
         None,
-        Dash,
+        Basic,
+        DashBasic,
+        DashBoss,
         BlackHole,
         Laser,
     }

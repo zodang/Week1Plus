@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6364692410102873827}
   - component: {fileID: 484177703972530780}
+  - component: {fileID: 8700842257803276779}
   - component: {fileID: 7926647595969934840}
   - component: {fileID: 6978058334761493565}
   m_Layer: 3
@@ -304,16 +305,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c0e338b80881248b8d5dca08866990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
+  enemyType: 3
   score: 3000
   healthMaxCount: 100
-  rotationSpeed: 8
-  moveSpeed: 5
-  moveTime: 0.7
-  restTime: 1
+  EnemyMovement: {fileID: 3294626025747585815, guid: 312aad9e9c96f51449af91db52db9e95, type: 3}
   healthSlider: {fileID: 5237693699272919852}
+  dashDelayCount: 3
+  dashCount: 3
   dashSpeed: 25
   rushDistance: 10
+--- !u!114 &8700842257803276779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644229858830621723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406dce1768fde5e4f898a10f7098606c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 8
+  moveTime: 0.7
+  restTime: 1
+  basicChaseRange: 5
 --- !u!50 &7926647595969934840
 Rigidbody2D:
   serializedVersion: 5
