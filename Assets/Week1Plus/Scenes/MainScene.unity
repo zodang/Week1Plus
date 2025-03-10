@@ -11363,7 +11363,7 @@ MonoBehaviour:
   isBossSpawned: 0
   TotalScroeCount: 0
   initialHealthCount: 3
-  initialUltimateCount: 5
+  initialUltimateCount: 6
   LeftTime: 30
   basicEnemyCount: 20
 --- !u!1001 &2061990685977649773

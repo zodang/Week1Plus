@@ -35,6 +35,11 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
+
+        if (UltimateTotalCount <= 0)
+        {
+            return;
+        }
         
         if (Input.GetMouseButton(1))
         {
@@ -56,7 +61,6 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
-
 
         if (_currentProjectile != null)
         {
