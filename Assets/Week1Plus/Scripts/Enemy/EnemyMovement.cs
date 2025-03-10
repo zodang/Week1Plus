@@ -55,14 +55,14 @@ public class EnemyMovement : MonoBehaviour
                 StartCoroutine(BasicMoveRoutine());
                 break;
             case EnemyType.BossDash:
-                StartCoroutine(BossDashMoveCo());
+                StartCoroutine(BossDashMoveCo(1));
                 break;
             case EnemyType.BossLaser:
-            {
                 StartFiringLaser();
                 break;
-            }
             case EnemyType.BossBlackHole:
+                StartCoroutine(BossDashMoveCo(3));
+                SetBlackHoleMagnitude(-200);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -208,12 +208,12 @@ public class EnemyMovement : MonoBehaviour
         }
     }
     
-    private IEnumerator BossDashMoveCo()
+    private IEnumerator BossDashMoveCo(int basicEnemyIndex)
     {
         while (true)
         {
             yield return new WaitForSeconds(dashDelayCount);
-            GameManager.Instance.SpawnManager.SpawnEnemy(1, GameManager.Instance.SpawnManager.SetRandomPosition(5, 7));
+            GameManager.Instance.SpawnManager.SpawnEnemy(basicEnemyIndex, GameManager.Instance.SpawnManager.SetRandomPosition(5, 7));
             
             for (var i = 0; i < dashCount; i++)
             {
@@ -376,6 +376,39 @@ public class EnemyMovement : MonoBehaviour
             laser.transform.position = transform.position + (Vector3)_targetDirection * (_laserDistance * 0.5f);
         }
     }
+    #endregion
+
+    #region BlackHole
+
+    [Header("BlackHole")]
+    [SerializeField] PointEffector2D pointEffector;
+    [SerializeField] GameObject particle;
+
+    public void SetBlackHoleMagnitude(float force)
+    {
+        pointEffector.forceMagnitude = force;
+    }
+    
+    
+    public void StopPointEffectorCo()
+    {
+        StartCoroutine(StopPointEffector(3.0f));
+    }
+
+    private IEnumerator StopPointEffector(float count)
+    {
+        GameManager.Instance.Player.StartPlayerDamage(true);
+        SetBlackHoleMagnitude(0);
+        particle.SetActive(false);
+        
+        yield return new WaitForSeconds(count);
+        
+        GameManager.Instance.Player.StartPlayerDamage(true);
+        SetBlackHoleMagnitude(-200);
+
+        particle.SetActive(true);
+    }
+    
     #endregion
 
     private void OnDestroy()

@@ -20,7 +20,5 @@ public class BossZone : MonoBehaviour
         isPlayerInBossZone = true;
         GameManager.Instance.Camera.SetCameraTarget(boss.gameObject);
         
-        var enemy = GameManager.Instance.SpawnManager.SpawnedBossEnemy;
-        enemy.EnemyMovement.StartMovement(enemy.enemyType);
     }
 }

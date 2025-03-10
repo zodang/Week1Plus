@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private bool _canMove = true;
+    public bool _canDamage = true;
 
     public PlayerAttack playerAttack;
     public PlayerNotifier PlayerNotifier;
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("BlackHole"))
         {
             var enemy = collision.GetComponent<EnemyController>();
 
@@ -73,6 +74,12 @@ public class PlayerController : MonoBehaviour
             HealthTotalCount--;
             StartCoroutine(GameManager.Instance.Camera.ShakeCameraCo());
         }
+        
+        if (collision.CompareTag("BlackHole"))
+        {
+            Debug.Log("Black Hole");
+            GameManager.Instance.SpawnManager.SpawnedBossEnemy.EnemyMovement.StopPointEffectorCo();
+        }
 
 
         if (collision.CompareTag("Item"))
@@ -86,6 +93,11 @@ public class PlayerController : MonoBehaviour
     {
         _canMove = canMove;
         rigidbody.linearVelocity = Vector2.zero;
+    }
+    
+    public void StartPlayerDamage(bool canDamage)
+    {
+        _canDamage = canDamage;
     }
 
     private void MovePlayer()

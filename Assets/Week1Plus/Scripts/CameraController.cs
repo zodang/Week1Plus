@@ -100,8 +100,10 @@ public class CameraController : MonoBehaviour
         IsTransitioning = false;
         _gameManager.Player.IsBossState = true;
         _gameManager.StartElapsedTimer();
-        
         _gameManager.SpawnManager.SpawnedBossEnemy.StartDamage(true);
+        
+        var enemy = GameManager.Instance.SpawnManager.SpawnedBossEnemy;
+        enemy.EnemyMovement.StartMovement(enemy.enemyType);
 
     }
     

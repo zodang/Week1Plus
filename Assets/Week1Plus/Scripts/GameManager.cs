@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
         Player.HealthTotalCount = initialHealthCount;
         Player.playerAttack.UltimateTotalCount = initialUltimateCount;
 
+        Player.StartPlayerDamage(true);
         _currentLeftTime = LeftTime;
         _elapsedTime = 0;
         

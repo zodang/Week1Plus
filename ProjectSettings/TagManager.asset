@@ -10,6 +10,7 @@ TagManager:
   - Ultimate
   - Item
   - Laser
+  - BlackHole
   layers:
   - Default
   - TransparentFX

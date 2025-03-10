@@ -4521,7 +4521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1393308175
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -11693,7 +11693,7 @@ MonoBehaviour:
   TotalScroeCount: 0
   initialHealthCount: 3
   initialUltimateCount: 6
-  LeftTime: 30
+  LeftTime: 1
   basicEnemyCount: 10
 --- !u!1001 &2061990685977649773
 PrefabInstance:
