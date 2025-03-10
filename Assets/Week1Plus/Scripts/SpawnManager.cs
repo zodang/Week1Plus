@@ -39,8 +39,13 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnRandomEnemy()
     {
+        var randomIndex = Random.Range(0, 2);
+        if (randomIndex != 0)
+        {
+            randomIndex = GameManager.Instance.CurrentBossIndex + 1;
+        }
         var randomPos = SetRandomPosition(enemySpawnRange.x, enemySpawnRange.y);
-        var newEnemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], randomPos, Quaternion.identity, EnemyGroup.transform);
+        var newEnemy = Instantiate(Enemies[randomIndex], randomPos, Quaternion.identity, EnemyGroup.transform);
         SpawnedEnemyList.Add(newEnemy);
     }
 

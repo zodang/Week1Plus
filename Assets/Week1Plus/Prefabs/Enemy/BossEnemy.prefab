@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68b99f2d9b176f45b800c51ae180576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerInBossZone: 0
   boss: {fileID: 1644229858830621723}
 --- !u!1 &1644229858830621723
 GameObject:
@@ -206,12 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c0e338b80881248b8d5dca08866990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
+  enemyType: 0
+  score: 50
   healthMaxCount: 100
-  rotationSpeed: 8
-  moveSpeed: 5
-  moveTime: 0.7
-  restTime: 1
+  EnemyMovement: {fileID: 0}
   healthSlider: {fileID: 5237693699272919852}
 --- !u!50 &7926647595969934840
 Rigidbody2D:

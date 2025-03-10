@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using EnumTypes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
@@ -17,17 +18,12 @@ public class EnemyMovement : MonoBehaviour
     [Header("Chase")]
     [SerializeField] private float basicChaseRange = 5f;
     
-    [Header("Dash")] 
-    [SerializeField] private int dashDelayCount = 3;
-    [SerializeField] private int dashCount = 3;
-    [SerializeField] private float dashSpeed = 25f;
-    [SerializeField] private float rushDistance = 10f;
-    
     private Transform _player;
     private Rigidbody2D _rigidbody;
 
-    public void InitMovement(Transform player, Rigidbody2D rigidbody)
+    public void InitMovement(EnemyType type, Transform player, Rigidbody2D rigidbody)
     {
+        _type = type;
         _player = player;
         _rigidbody = rigidbody;
     }
@@ -36,12 +32,11 @@ public class EnemyMovement : MonoBehaviour
     {
         _type = type;
         
-        
         if (!gameObject.activeInHierarchy)
         {
             gameObject.SetActive(true);
         }
-        
+
         switch (_type)
         {
             case EnemyType.None:
@@ -49,26 +44,75 @@ public class EnemyMovement : MonoBehaviour
             case EnemyType.Basic:
                 StartCoroutine(BasicMoveRoutine());
                 break;
-            case EnemyType.DashBasic:
+            case EnemyType.BasicDash:
                 StartCoroutine(BasicDashMoveCo());
                 break;
-            case EnemyType.DashBoss:
-                StartCoroutine(DashMoveCo());
+            case EnemyType.BasicLaser:
+                StartCoroutine(BasicMoveRoutine());
+                StartFiringLaser();
                 break;
-            case EnemyType.BlackHole:
+            case EnemyType.BasicBlackHole:
                 break;
-            case EnemyType.Laser:
+            case EnemyType.BossDash:
+                StartCoroutine(BossDashMoveCo());
+                break;
+            case EnemyType.BossLaser:
+            {
+                StartFiringLaser();
+                break;
+            }
+            case EnemyType.BossBlackHole:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
+    private void StartFiringLaser()
+    {
+        _canFire = true;
+    }
+
     private void FixedUpdate()
     {
         if (_isMoving)
         {
             _rigidbody.linearVelocity = _moveDirection * moveSpeed;
+        }
+
+        if (laser != null)
+        {
+            UpdateLaserPosition();
+        }
+            
+        if (_type == EnemyType.BossLaser)
+        {
+            if (!GameManager.Instance.Player.IsBossState || !_canFire)
+            {
+                return;
+            }
+            
+            if (laserCo != null)
+            {
+                StopCoroutine(laserCo);
+            }
+
+            laserCo = StartCoroutine(BossFireLaser());
+        }
+
+        if (_type == EnemyType.BasicLaser)
+        {
+            if (!_canFire)
+            {
+                return;
+            }
+            
+            if (laserCo != null)
+            {
+                StopCoroutine(laserCo);
+            }
+
+            laserCo = StartCoroutine(BasicFireLaser());
         }
     }
     
@@ -86,7 +130,7 @@ public class EnemyMovement : MonoBehaviour
 
 
     #region Basic Enemy
-    public IEnumerator BasicMoveRoutine()
+    private IEnumerator BasicMoveRoutine()
     {
         while (true)
         {
@@ -133,9 +177,15 @@ public class EnemyMovement : MonoBehaviour
 
     #endregion
 
-    #region DashBasic
+    #region Dash
+    
+    [Header("Dash")] 
+    [SerializeField] private int dashDelayCount = 3;
+    [SerializeField] private int dashCount = 3;
+    [SerializeField] private float dashSpeed = 25f;
+    [SerializeField] private float rushDistance = 10f;
 
-    public IEnumerator BasicDashMoveCo()
+    private IEnumerator BasicDashMoveCo()
     {
         while (true)
         {
@@ -156,11 +206,8 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
-
-    #endregion
-
-    #region DashBoss
-    public IEnumerator DashMoveCo()
+    
+    private IEnumerator BossDashMoveCo()
     {
         while (true)
         {
@@ -207,4 +254,137 @@ public class EnemyMovement : MonoBehaviour
 
     #endregion
     
+    #region Laser
+    
+    [Header("Laser")]
+    [SerializeField] private GameObject laserPrefab;
+    private GameObject laser;
+    private Coroutine laserCo;
+    
+    [SerializeField] private float growSpeed = 3.0f;
+    [SerializeField] private float laserDuration = 1.5f;
+    [SerializeField] private float basicLaserDistance = 5f;
+    [SerializeField] private float bossLaserDistance = 20f;
+    
+    [SerializeField] private float laserRate = 3f;
+    [SerializeField] private float laserRange = 8f;
+     public bool _canFire = false;
+    
+    private Vector2 _targetDirection;
+    private float _laserDistance;
+    
+    private IEnumerator BasicFireLaser()
+    {
+        _canFire = false;
+
+        _targetDirection = Random.insideUnitCircle.normalized;
+        _laserDistance = 0f;
+
+        // Create laser
+        laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        laser.transform.localScale = new Vector3(0.5f, 0f, 1f);
+
+        // Increase laser
+        float elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.deltaTime * growSpeed;
+            _laserDistance = Mathf.Lerp(0, basicLaserDistance, elapsed);
+            UpdateLaserTransform();
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(laserDuration);
+
+        // Decrease Laser
+        elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.deltaTime * growSpeed;
+            _laserDistance = Mathf.Lerp(basicLaserDistance, 0, elapsed);
+            UpdateLaserTransform();
+            yield return null;
+        }
+
+        // Delete laser
+        Destroy(laser);
+        laser = null;
+
+        yield return new WaitForSeconds(laserRate);
+        _canFire = true;
+    }
+   
+    private IEnumerator BossFireLaser()
+    {
+        _canFire = false;
+
+        _targetDirection = Random.insideUnitCircle.normalized;
+        _laserDistance = 0f;
+
+        // Create laser
+        laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        laser.transform.localScale = new Vector3(0.5f, 0f, 1f);
+
+        // Increase laser
+        float elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.deltaTime * growSpeed;
+            _laserDistance = Mathf.Lerp(0, bossLaserDistance, elapsed);
+            UpdateLaserTransform();
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(laserDuration);
+
+        // Decrease Laser
+        elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.deltaTime * growSpeed;
+            _laserDistance = Mathf.Lerp(bossLaserDistance, 0, elapsed);
+            UpdateLaserTransform();
+            yield return null;
+        }
+
+        // Delete laser
+        Destroy(laser);
+        laser = null;
+
+        yield return new WaitForSeconds(laserRate);
+        _canFire = true;
+    }
+    
+    private void UpdateLaserTransform()
+    {
+        if (laser != null)
+        {
+            laser.transform.localScale = new Vector3(0.5f, _laserDistance, 1f);
+
+            laser.transform.position = transform.position + (Vector3)_targetDirection * (_laserDistance * 0.5f);
+
+            var angle = Mathf.Atan2(_targetDirection.y, _targetDirection.x) * Mathf.Rad2Deg;
+            laser.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        }
+    }
+    
+    private void UpdateLaserPosition()
+    {
+        if (laser != null)
+        {
+            laser.transform.position = transform.position + (Vector3)_targetDirection * (_laserDistance * 0.5f);
+        }
+    }
+    #endregion
+
+    private void OnDestroy()
+    {
+        if (_type == EnemyType.BasicLaser || _type == EnemyType.BossLaser)
+        {
+            if (laser != null)
+            {
+                Destroy(laser);
+            }
+        }
+    }
 }

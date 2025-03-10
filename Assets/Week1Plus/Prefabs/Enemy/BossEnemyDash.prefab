@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c0e338b80881248b8d5dca08866990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 3
+  enemyType: 5
   score: 3000
   healthMaxCount: 100
   EnemyMovement: {fileID: 3294626025747585815}
@@ -244,6 +244,12 @@ MonoBehaviour:
   dashCount: 10
   dashSpeed: 25
   rushDistance: 10
+  laserPrefab: {fileID: 0}
+  growSpeed: 3
+  laserDuration: 1.5
+  maxLaserDistance: 20
+  laserRate: 3
+  laserRange: 8
 --- !u!50 &7926647595969934840
 Rigidbody2D:
   serializedVersion: 5

@@ -51,9 +51,9 @@ public class EnemyController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         HealthTotalCount = healthMaxCount;
         
-        EnemyMovement.InitMovement(Player, Rigidbody);
-
-        if (enemyType is EnemyType.DashBoss or EnemyType.Laser or EnemyType.BlackHole)
+        EnemyMovement.InitMovement(enemyType, Player, Rigidbody);
+        
+        if (enemyType is EnemyType.BossLaser or EnemyType.BossDash  or EnemyType.BossBlackHole)
         {
             _bossEnemy = GetComponent<BossEnemy>();
         }
@@ -62,6 +62,7 @@ public class EnemyController : MonoBehaviour
         {
             EnemyMovement.StartMovement(enemyType);
         }
+        
 
         StartDamage(true);
     }

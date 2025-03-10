@@ -35,6 +35,7 @@ public class CameraController : MonoBehaviour
     {
         _target = newTarget;
     }
+    
     void Update()
     {
         // Camera Shaking 

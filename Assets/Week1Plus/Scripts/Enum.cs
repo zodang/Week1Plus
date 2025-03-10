@@ -21,9 +21,11 @@ namespace EnumTypes
     {
         None,
         Basic,
-        DashBasic,
-        DashBoss,
-        BlackHole,
-        Laser,
+        BasicDash,
+        BasicLaser,
+        BasicBlackHole,
+        BossDash,
+        BossLaser,
+        BossBlackHole,
     }
 }

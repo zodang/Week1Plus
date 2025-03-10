@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using EnumTypes;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
